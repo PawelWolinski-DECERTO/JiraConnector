@@ -1,0 +1,23 @@
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:jira="http://www.mulesoft.org/schema/mule/jira"
+      xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+          http://www.mulesoft.org/schema/mule/jira http://www.mulesoft.org/schema/mule/jira/current/mule-jira.xsd">
+
+    <jira:config name="config" configId="configId">
+        <jira:connection
+                url="http://localhost:8089/rest/api/2/issue/"
+                username="con.mulesoft"
+                password="con.mulesoft"
+        />
+    </jira:config>
+
+    <flow name="getTaskFlow">
+        <jira:get-task taskId="JC-2" config-ref="config"/>
+    </flow>
+
+    <flow name="addCommentFlow">
+        <jira:add-comment taskId="JC-2" msg="Testowa" config-ref="config"/>
+    </flow>
+
+</mule>
